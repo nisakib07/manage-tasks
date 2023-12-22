@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
@@ -23,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
+    <div className="navbar bg-slate-200" id="sidebar">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

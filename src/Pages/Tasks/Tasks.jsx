@@ -1,120 +1,91 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteOutline } from "react-icons/md";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { CiEdit } from "react-icons/ci";
+import TaskWrapper from "./TaskWrapper";
+
+// const Tasks = () => {
+//   const { user } = useContext(AuthContext);
+//   const [tasks, setTasks] = useState([]);
+//   const [toDo, setToDo] = useState([]);
+//   const [completed, setCompleted] = useState([]);
+//   const [ongoing, setOngoing] = useState([]);
+//   const {
+//     data: allTasks = [],
+//     refetch,
+//     isLoading,
+//   } = useQuery({
+//     queryKey: ["allTasks"],
+//     enabled: !!user?.email,
+//     queryFn: () =>
+//       fetch(`http://localhost:5000/allTasks/${user?.email}`)
+//         .then((res) => res.json())
+//         .then((data) => {
+//           setTasks(data);
+//         }),
+//   });
+
+//   useEffect(() => {
+//     const toDo = tasks?.filter((task) => task.status === "toDo");
+//     const completed = tasks?.filter((task) => task.status === "completed");
+//     const ongoing = tasks?.filter((task) => task.status === "ongoing");
+//     setToDo(toDo);
+//     setCompleted(completed);
+//     setOngoing(ongoing);
+//   }, [tasks]);
+
+//   const taskStatus = ["toDo", "ongoing", "completed"];
+
+//   return (
+//     <DndProvider backend={HTML5Backend}>
+//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+//         {taskStatus.map((status, idx) => (
+//           <TaskWrapper
+//             key={idx}
+//             status={status}
+//             toDo={toDo}
+//             ongoing={ongoing}
+//             completed={completed}
+//             tasks={tasks}
+//             setTasks={setTasks}></TaskWrapper>
+//         ))}
+//       </div>
+//     </DndProvider>
+//   );
+// };
 
 const Tasks = () => {
   const { user } = useContext(AuthContext);
-  const {
-    data: allTasks = [],
-    refetch,
-    isLoading,
-  } = useQuery({
+  const [tasks, setTasks] = useState([]);
+  const { data, refetch } = useQuery({
     queryKey: ["allTasks"],
     enabled: !!user?.email,
     queryFn: () =>
-      fetch(`http://localhost:5000/allTasks/${user?.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/allTasks/${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setTasks(data);
+          return data;
+        }),
   });
 
-  const toDo = allTasks.filter((task) => task.status === "toDo");
-  const completed = allTasks.filter((task) => task.status === "completed");
-  const ongoing = allTasks.filter((task) => task.status === "ongoing");
-  console.log(toDo, completed, ongoing);
-
   return (
-    <div>
+    <DndProvider backend={HTML5Backend}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
-        <div>
-          <h1 className="bg-red-500 text-center py-2 rounded-xl text-lg font-bold">
-            To Do
-          </h1>
-
-          <ul>
-            {toDo &&
-              toDo.map((singleTask) => (
-                <li
-                  className="bg-cyan-300 mt-2 rounded-lg px-2 min-h-10 py-3"
-                  key={singleTask._id}>
-                  <h3 className="text-lg font-semibold">
-                    {singleTask.taskName}
-                  </h3>
-                  <p className="text-justify text-sm">
-                    {singleTask.taskDescription}
-                  </p>
-                  <div className="mt-3 text-xl flex gap-3">
-                    <button>
-                      <CiEdit></CiEdit>
-                    </button>
-                    <button>
-                      <MdDeleteOutline></MdDeleteOutline>
-                    </button>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </div>
-        <div>
-          <h1 className="bg-orange-500 text-center py-2 rounded-xl text-lg font-bold">
-            Ongoing
-          </h1>
-          <ul>
-            {ongoing &&
-              ongoing.map((singleTask) => (
-                <li
-                  className="bg-cyan-300 mt-2 rounded-lg px-2 min-h-10 py-3"
-                  key={singleTask._id}>
-                  <h3 className="text-lg font-semibold">
-                    {singleTask.taskName}
-                  </h3>
-                  <p className="text-justify text-sm">
-                    {singleTask.taskDescription}
-                  </p>
-                  <div className="mt-3 text-xl flex gap-3">
-                    <button>
-                      <CiEdit></CiEdit>
-                    </button>
-                    <button>
-                      <MdDeleteOutline></MdDeleteOutline>
-                    </button>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </div>
-        <div>
-          <h1 className="bg-green-500 text-center py-2 rounded-xl text-lg font-bold">
-            Completed
-          </h1>
-          <ul>
-            {completed &&
-              completed.map((singleTask) => (
-                <li
-                  className="bg-cyan-300 mt-2 rounded-lg px-2 min-h-10 py-3"
-                  key={singleTask._id}>
-                  <h3 className="text-lg font-semibold">
-                    {singleTask.taskName}
-                  </h3>
-                  <p className="text-justify text-sm">
-                    {singleTask.taskDescription}
-                  </p>
-                  <div className="mt-3 text-xl flex gap-3">
-                    <button>
-                      <CiEdit></CiEdit>
-                    </button>
-                    <button>
-                      <MdDeleteOutline></MdDeleteOutline>
-                    </button>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </div>
+        {["toDo", "ongoing", "completed"].map((status, idx) => (
+          <TaskWrapper
+            key={idx}
+            status={status}
+            tasks={tasks}
+            setTasks={setTasks}
+            refetch={refetch}
+          />
+        ))}
       </div>
-    </div>
+    </DndProvider>
   );
 };
 

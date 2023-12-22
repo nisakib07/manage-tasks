@@ -1,0 +1,7 @@
+#sidebar a {
+  @apply hover:bg-inherit transition-colors;
+}
+
+#sidebar a.active {
+  @apply text-red-500 bg-inherit hover:bg-none;
+}
