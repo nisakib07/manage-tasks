@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import Navbar from "../Home/Navbar";
+
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
@@ -28,9 +28,7 @@ const AddTask = () => {
   };
 
   return (
-    <div className="bg-zinc-400">
-      <Navbar></Navbar>
-
+    <div>
       <div
         className="hero min-h-screen"
         style={{

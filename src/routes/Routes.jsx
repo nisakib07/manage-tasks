@@ -4,6 +4,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Home from "../Pages/Home/Home";
 import AddTask from "../Pages/AddTask/AddTask";
+import MainLayout from "../Pages/MainLayout/MainLayout";
 
 const Routes = createBrowserRouter([
   {
@@ -12,19 +13,25 @@ const Routes = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Home></Home>,
-  },
-  {
-    path: "/addTask",
-    element: <AddTask></AddTask>,
-  },
-  {
-    path: "/login",
-    element: <Login></Login>,
-  },
-  {
-    path: "/register",
-    element: <Register></Register>,
+    element: <MainLayout></MainLayout>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/addTask",
+        element: <AddTask></AddTask>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
   },
 ]);
 
