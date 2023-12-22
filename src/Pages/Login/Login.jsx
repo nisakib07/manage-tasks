@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
-import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { userSignIn, googleSignIn } = useContext(AuthContext);
@@ -38,65 +37,70 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Helmet>
-        <title>SportsSync | Login</title>
-      </Helmet>
-      <div className="min-h-screen max-w-2xl mx-auto mt-10">
-        <div className="flex-col">
-          <div className="w-full rounded-2xl shadow-2xl bg-base-100">
-            <form
-              className="card-body bg-cyan-200 rounded-lg"
-              onSubmit={handleLogin}>
-              <div className="form-control">
-                <label className="label">
-                  <span className="text-lg">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter you email"
-                  className="input input-bordered"
-                  name="email"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="text-lg">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  className="input input-bordered"
-                  name="password"
-                  required
-                />
-              </div>
-              <div className="form-control mt-6">
-                <button
-                  type="submit"
-                  className="btn bg-teal-500 hover:bg-teal-400">
-                  Login
-                </button>
+    <div
+      className="hero min-h-screen"
+      style={{
+        backgroundImage: "url(https://i.ibb.co/g4W9CNv/login-bg.jpg)",
+      }}>
+      <div className="hero-overlay bg-opacity-60"></div>
+      <div className="hero-content text-center">
+        <div className="max-w-2xl mx-auto">
+          <div className="flex-col">
+            <div className="w-full rounded-2xl shadow-2xl bg-base-100">
+              <form
+                className="card-body bg-transparent bg-zinc-500 rounded-lg"
+                onSubmit={handleLogin}>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="text-lg">Email</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter you email"
+                    className="input input-bordered"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="text-lg">Password</span>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Enter Password"
+                    className="input input-bordered"
+                    name="password"
+                    required
+                  />
+                </div>
+                <div className="form-control mt-6">
+                  <button
+                    type="submit"
+                    className="btn bg-teal-500 hover:bg-teal-400">
+                    Login
+                  </button>
 
-                <div className="mt-5 text-lg">
-                  <p className="text-center">Or Sign In With</p>
-                  <div className="flex justify-center">
-                    <button onClick={handleGoogleLogin}>
-                      <FcGoogle className="text-2xl mt-4"></FcGoogle>
-                    </button>
+                  <div className="mt-5 text-lg">
+                    <p className="text-center">Or Sign In With</p>
+                    <div className="flex justify-center">
+                      <button onClick={handleGoogleLogin}>
+                        <FcGoogle className="text-2xl mt-4"></FcGoogle>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <p className="text-center mt-5 text-lg">
-                New Here?
-                <span className="text-orange-600">
-                  <Link to="/register"> Register</Link>
-                </span>
-              </p>
-            </form>
+                <p className="text-center mt-5 text-lg">
+                  New Here?
+                  <span className="text-orange-600">
+                    <Link to="/register"> Register</Link>
+                  </span>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
+        <ToastContainer></ToastContainer>
       </div>
     </div>
   );
