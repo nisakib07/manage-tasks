@@ -30,7 +30,7 @@ const Register = () => {
     createUser(email, password)
       .then(() => {
         userProfileUpdate(name, photo);
-        navigate("/dashboard");
+        navigate("/");
         toast.success("Successfully Registered");
         form.reset();
       })

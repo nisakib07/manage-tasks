@@ -18,7 +18,7 @@ const Login = () => {
 
     userSignIn(email, password)
       .then(() => {
-        navigate("/dashboard");
+        navigate("/");
         toast.success("Logged In Successfully");
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleSignIn()
       .then(() => {
-        navigate("/dashboard");
+        navigate("/");
         toast.success("Logged In Successfully");
       })
       .catch((error) => {

@@ -8,7 +8,7 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li className="text-lg font-semibold">
-        <NavLink to="/tasks">Tasks</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
 
       <li className="text-lg font-semibold">
@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     userLogout();
-    navigate("/");
+    navigate("/banner");
   };
 
   return (

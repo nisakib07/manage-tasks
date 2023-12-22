@@ -1,17 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../Pages/Home/Home";
+import Banner from "../Pages/Banner/Banner";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import Home from "../Pages/Home/Home";
+import AddTask from "../Pages/AddTask/AddTask";
 
 const Routes = createBrowserRouter([
+  {
+    path: "/banner",
+    element: <Banner></Banner>,
+  },
   {
     path: "/",
     element: <Home></Home>,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    path: "/addTask",
+    element: <AddTask></AddTask>,
   },
   {
     path: "/login",
