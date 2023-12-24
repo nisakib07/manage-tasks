@@ -5,8 +5,15 @@ import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const TaskItem = ({ singleTask, status, refetch }) => {
+  const { register, handleSubmit, reset } = useForm();
+
+  const { user } = useContext(AuthContext);
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "singleTask",
     item: { id: singleTask._id, status: status },
@@ -15,9 +22,9 @@ const TaskItem = ({ singleTask, status, refetch }) => {
     }),
   }));
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     Swal.fire({
-      title: "Want to delete this article?",
+      title: "Want to delete this task?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -31,11 +38,31 @@ const TaskItem = ({ singleTask, status, refetch }) => {
           .then((res) => {
             if (res.data.deletedCount > 0) {
               refetch();
-              toast.success("Article Deleted");
+              toast.success("Task Deleted");
             }
           });
       }
     });
+  };
+
+  const onSubmit = async (data) => {
+    const updatedTask = {
+      taskName: data.taskName,
+      taskDescription: data.taskDescription,
+      priority: data.priority,
+      status: "toDo",
+      email: user?.email,
+      deadline: data.deadline,
+    };
+
+    await axios
+      .put(`http://localhost:5000/task/${singleTask._id}`, updatedTask)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success("Updated Successfully");
+          refetch();
+        }
+      });
   };
 
   const statusToColor = {
@@ -56,7 +83,8 @@ const TaskItem = ({ singleTask, status, refetch }) => {
           {singleTask.taskDescription}
         </p>
         <div className="mt-3 text-xl flex gap-3">
-          <button>
+          <button
+            onClick={() => document.getElementById("my_modal_5").showModal()}>
             <CiEdit></CiEdit>
           </button>
           <button onClick={handleDelete}>
@@ -64,6 +92,76 @@ const TaskItem = ({ singleTask, status, refetch }) => {
           </button>
         </div>
       </li>
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Task Name</span>
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    defaultValue={singleTask.taskName}
+                    placeholder="Task Name"
+                    className="input input-bordered"
+                    {...register("taskName")}
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Priority</span>
+                  </label>
+                  <select
+                    required
+                    className="select select-bordered"
+                    {...register("priority")}>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Task Description</span>
+                </label>
+                <textarea
+                  required
+                  placeholder="Task Description"
+                  defaultValue={singleTask.taskDescription}
+                  className="textarea textarea-bordered"
+                  {...register("taskDescription")}></textarea>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Deadline</span>
+                </label>
+                <input
+                  required
+                  defaultValue={singleTask.deadline}
+                  type="date"
+                  className="input input-bordered"
+                  {...register("deadline")}
+                />
+              </div>
+              <div className="flex justify-center mt-4">
+                <input
+                  className="btn bg-zinc-700 text-white border-none hover:bg-zinc-600"
+                  type="submit"
+                />
+              </div>
+            </form>
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </>
   );
 };
