@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { FaRegEye } from "react-icons/fa";
 
 const TaskItem = ({ singleTask, status, refetch }) => {
   const { register, handleSubmit } = useForm();
@@ -79,8 +80,12 @@ const TaskItem = ({ singleTask, status, refetch }) => {
         ref={drag}
         className={`${backgroundColor} mt-2 rounded-lg px-2 min-h-10 py-3`}>
         <h3 className="text-lg font-semibold">{singleTask.taskName}</h3>
-        <p className="text-justify text-sm h-[70px]">
-          {singleTask.taskDescription}
+        <p className="text-justify text-sm h-[50px]">
+          {singleTask.taskDescription.length < 50 ? (
+            singleTask.taskDescription
+          ) : (
+            <>{singleTask.taskDescription.slice(0, 50)}...</>
+          )}
         </p>
         <div className="mt-3 text-xl flex gap-3">
           <button
@@ -89,6 +94,12 @@ const TaskItem = ({ singleTask, status, refetch }) => {
           </button>
           <button onClick={handleDelete}>
             <MdDeleteOutline></MdDeleteOutline>
+          </button>
+          <button
+            onClick={() =>
+              document.getElementById(`${singleTask._id}`).showModal()
+            }>
+            <FaRegEye></FaRegEye>
           </button>
         </div>
       </li>
@@ -157,6 +168,25 @@ const TaskItem = ({ singleTask, status, refetch }) => {
           </div>
           <div className="modal-action">
             <form method="dialog">
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog
+        id={singleTask._id}
+        className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h1 className="font-bold text-xl">{singleTask.taskName}</h1>
+          <p className="py-4">{singleTask.taskDescription}</p>
+          <p>
+            <span className="font-bold">Deadline : </span>
+            {singleTask.deadline}
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
           </div>
