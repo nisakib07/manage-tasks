@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Blocks } from "react-loader-spinner";
+import { Hearts } from "react-loader-spinner";
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -9,14 +9,16 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <Blocks
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-      />
+      <div className="flex justify-center items-center h-[80vh]">
+        <Hearts
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="hearts-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}></Hearts>
+      </div>
     );
   }
 

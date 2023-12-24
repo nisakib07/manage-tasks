@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <div className="min-h-screen">
+    <div className="">
       <div
-        className="hero min-h-screen"
+        className="hero min-h-[500px]"
         style={{
           backgroundImage: "url(https://i.ibb.co/QD6S6cm/banner.jpg)",
         }}>

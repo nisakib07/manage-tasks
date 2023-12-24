@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <div className=" bg-slate-100 ">
+        <div className=" bg-slate-100 min-h-screen">
           <div className="max-w-screen-xl mx-auto">
             <RouterProvider router={Routes} />
             <ToastContainer></ToastContainer>

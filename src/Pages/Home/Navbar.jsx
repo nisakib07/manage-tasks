@@ -9,7 +9,7 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li className="text-lg font-semibold">
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/tasks">Home</NavLink>
       </li>
 
       <li className="text-lg font-semibold">
@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     userLogout();
-    navigate("/banner");
+    navigate("/");
   };
 
   return (
@@ -49,7 +49,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center">
-          <h1 className="text-2xl md:text-4xl font-bold">TaskIt</h1>
+          <h1 className="text-2xl md:text-4xl font-bold">SCC</h1>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">

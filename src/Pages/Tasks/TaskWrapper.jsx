@@ -15,7 +15,6 @@ const TaskWrapper = ({ status, tasks, setTasks, refetch }) => {
   }));
 
   const addItemToSection = async (id, newStatus) => {
-    // console.log(id, newStatus);
     setTasks((previousTasks) => {
       return previousTasks?.map((item) =>
         item._id === id ? { ...item, status: newStatus } : item
@@ -43,6 +42,7 @@ const TaskWrapper = ({ status, tasks, setTasks, refetch }) => {
         }`}>
         {text}
       </h1>
+
       <ul>
         {filteredTasks.map((singleTask) => (
           <TaskItem

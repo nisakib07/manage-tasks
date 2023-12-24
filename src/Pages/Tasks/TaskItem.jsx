@@ -77,8 +77,17 @@ const TaskItem = ({ singleTask, status, refetch }) => {
   return (
     <>
       <li
+        data-aos={
+          status === "toDo"
+            ? "fade-right"
+            : status === "ongoing"
+            ? "fade-up"
+            : "fade-left"
+        }
+        data-aos-delay="50"
+        data-aos-duration="1000"
         ref={drag}
-        className={`${backgroundColor} mt-2 rounded-lg px-2 min-h-10 py-3`}>
+        className={`${backgroundColor} mt-2 rounded-lg px-2 min-h-10 py-3 overflow-x-hidden`}>
         <h3 className="text-lg font-semibold">{singleTask.taskName}</h3>
         <p className="text-justify text-sm h-[50px]">
           {singleTask.taskDescription.length < 50 ? (

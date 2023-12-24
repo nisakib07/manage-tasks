@@ -18,7 +18,7 @@ const Login = () => {
 
     userSignIn(email, password)
       .then(() => {
-        navigate("/");
+        navigate("/tasks");
         toast.success("Logged In Successfully");
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleSignIn()
       .then(() => {
-        navigate("/");
+        navigate("/tasks");
         toast.success("Logged In Successfully");
       })
       .catch((error) => {
@@ -92,7 +92,7 @@ const Login = () => {
               <p className="text-center mt-5 text-lg">
                 New Here?
                 <span className="text-orange-600">
-                  <Link to="/register"> Register</Link>
+                  <Link to="/register">Register</Link>
                 </span>
               </p>
             </div>

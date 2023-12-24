@@ -5,6 +5,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import TaskWrapper from "./TaskWrapper";
+import { Typewriter } from "react-simple-typewriter";
 
 // const Tasks = () => {
 //   const { user } = useContext(AuthContext);
@@ -73,17 +74,36 @@ const Tasks = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
-        {["toDo", "ongoing", "completed"].map((status, idx) => (
-          <TaskWrapper
-            key={idx}
-            status={status}
-            tasks={tasks}
-            setTasks={setTasks}
-            refetch={refetch}
-          />
-        ))}
-      </div>
+      {tasks.length === 0 ? (
+        <div className="flex justify-center text-xl">
+          <p>
+            Welcome! Keep note so that you{" "}
+            <span className="font-bold uppercase">
+              <Typewriter
+                words={["never miss", "never forget", "become perfect"]}
+                loop={5}
+                cursor
+                cursorStyle="_"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            </span>
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          {["toDo", "ongoing", "completed"].map((status, idx) => (
+            <TaskWrapper
+              key={idx}
+              status={status}
+              tasks={tasks}
+              setTasks={setTasks}
+              refetch={refetch}
+            />
+          ))}
+        </div>
+      )}
     </DndProvider>
   );
 };
