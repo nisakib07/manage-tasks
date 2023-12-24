@@ -10,11 +10,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const TaskItem = ({ singleTask, status, refetch }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const { user } = useContext(AuthContext);
 
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [, drag] = useDrag(() => ({
     type: "singleTask",
     item: { id: singleTask._id, status: status },
     collect: (monitor) => ({
@@ -169,6 +169,7 @@ const TaskItem = ({ singleTask, status, refetch }) => {
 TaskItem.propTypes = {
   singleTask: PropTypes.object,
   status: PropTypes.string,
+  refetch: PropTypes.func,
 };
 
 export default TaskItem;

@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import { MdDeleteOutline } from "react-icons/md";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -60,7 +59,7 @@ import TaskWrapper from "./TaskWrapper";
 const Tasks = () => {
   const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
-  const { data, refetch } = useQuery({
+  const { refetch } = useQuery({
     queryKey: ["allTasks"],
     enabled: !!user?.email,
     queryFn: () =>

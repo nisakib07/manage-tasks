@@ -1,11 +1,12 @@
 import { useDrop } from "react-dnd";
 import TaskItem from "./TaskItem";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const TaskWrapper = ({ status, tasks, setTasks, refetch }) => {
   const filteredTasks = tasks.filter((task) => task.status === status);
 
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: "singleTask",
     drop: (item) => addItemToSection(item.id, status),
     collect: (monitor) => ({
@@ -53,6 +54,13 @@ const TaskWrapper = ({ status, tasks, setTasks, refetch }) => {
       </ul>
     </div>
   );
+};
+
+TaskWrapper.propTypes = {
+  status: PropTypes.string,
+  tasks: PropTypes.array,
+  setTasks: PropTypes.func,
+  refetch: PropTypes.func,
 };
 
 export default TaskWrapper;
