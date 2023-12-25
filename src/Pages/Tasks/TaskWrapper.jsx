@@ -20,7 +20,9 @@ const TaskWrapper = ({ status, tasks, setTasks, refetch }) => {
         item._id === id ? { ...item, status: newStatus } : item
       );
     });
-    await axios.put(`http://localhost:5000/task/${id}`, { status: newStatus });
+    await axios.put(`https://manage-tasks-server-nu.vercel.app/task/${id}`, {
+      status: newStatus,
+    });
   };
 
   let text = "To Do";

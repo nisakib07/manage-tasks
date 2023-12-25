@@ -19,17 +19,19 @@ const AddTask = () => {
       deadline: data.deadline,
     };
 
-    axios.post("http://localhost:5000/tasks", newTask).then((res) => {
-      if (res.data.insertedId) {
-        reset();
-        toast.success("Task Added");
-      }
-    });
+    axios
+      .post("https://manage-tasks-server-nu.vercel.app/tasks", newTask)
+      .then((res) => {
+        if (res.data.insertedId) {
+          reset();
+          toast.success("Task Added");
+        }
+      });
   };
 
   return (
     <div>
-      <div className="hero-content text-center">
+      <div className="hero-content text-center min-h-screen">
         <div className="bg-zinc-400 p-5 rounded-lg">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

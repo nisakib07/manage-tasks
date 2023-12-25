@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import "./Navbar.css";
+import logo from "../../../src/assets/logo.png";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
@@ -48,8 +49,8 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <div className="flex items-center">
-          <h1 className="text-2xl md:text-4xl font-bold">SCC</h1>
+        <div className="w-[60px]">
+          <img src={logo} alt="" />{" "}
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">

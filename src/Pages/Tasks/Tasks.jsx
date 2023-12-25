@@ -21,7 +21,7 @@ import { Typewriter } from "react-simple-typewriter";
 //     queryKey: ["allTasks"],
 //     enabled: !!user?.email,
 //     queryFn: () =>
-//       fetch(`http://localhost:5000/allTasks/${user?.email}`)
+//       fetch(`https://manage-tasks-server-nu.vercel.app/allTasks/${user?.email}`)
 //         .then((res) => res.json())
 //         .then((data) => {
 //           setTasks(data);
@@ -64,7 +64,7 @@ const Tasks = () => {
     queryKey: ["allTasks"],
     enabled: !!user?.email,
     queryFn: () =>
-      fetch(`http://localhost:5000/allTasks/${user?.email}`)
+      fetch(`https://manage-tasks-server-nu.vercel.app/allTasks/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
           setTasks(data);

@@ -5,10 +5,9 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
-  const { userSignIn, googleSignIn, gitHubSignIn } = useContext(AuthContext);
+  const { userSignIn, googleSignIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -39,17 +38,6 @@ const Login = () => {
       });
   };
 
-  const handleGitHubSignIn = () => {
-    gitHubSignIn()
-      .then(() => {
-        navigate("/tasks");
-        toast.success("Logged In Successfully");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-        console.log(error);
-      });
-  };
   return (
     <div
       className="hero min-h-screen"
@@ -99,9 +87,6 @@ const Login = () => {
                 <div className="flex justify-center gap-3">
                   <button onClick={handleGoogleLogin}>
                     <FcGoogle className="text-2xl mt-4"></FcGoogle>
-                  </button>
-                  <button onClick={handleGitHubSignIn}>
-                    <FaGithub className="text-2xl mt-4"></FaGithub>
                   </button>
                 </div>
               </div>

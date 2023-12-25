@@ -35,7 +35,9 @@ const TaskItem = ({ singleTask, status, refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/task/${singleTask._id}`)
+          .delete(
+            `https://manage-tasks-server-nu.vercel.app/task/${singleTask._id}`
+          )
           .then((res) => {
             if (res.data.deletedCount > 0) {
               refetch();
@@ -57,7 +59,10 @@ const TaskItem = ({ singleTask, status, refetch }) => {
     };
 
     await axios
-      .put(`http://localhost:5000/task/${singleTask._id}`, updatedTask)
+      .put(
+        `https://manage-tasks-server-nu.vercel.app/task/${singleTask._id}`,
+        updatedTask
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           toast.success("Updated Successfully");
