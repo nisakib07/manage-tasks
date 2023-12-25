@@ -9,7 +9,7 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li className="text-lg font-semibold">
-        <NavLink to="/tasks">Home</NavLink>
+        <NavLink to="/tasks">Tasks</NavLink>
       </li>
 
       <li className="text-lg font-semibold">

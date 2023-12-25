@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { ToastContainer, toast } from "react-toastify";
+
 import { FcGoogle } from "react-icons/fc";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
-  const { userSignIn, googleSignIn } = useContext(AuthContext);
+  const { userSignIn, googleSignIn, gitHubSignIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -37,6 +39,17 @@ const Login = () => {
       });
   };
 
+  const handleGitHubSignIn = () => {
+    gitHubSignIn()
+      .then(() => {
+        navigate("/tasks");
+        toast.success("Logged In Successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        console.log(error);
+      });
+  };
   return (
     <div
       className="hero min-h-screen"
@@ -83,22 +96,24 @@ const Login = () => {
               </form>
               <div className="mt-5 text-lg">
                 <p className="text-center">Or Sign In With</p>
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-3">
                   <button onClick={handleGoogleLogin}>
                     <FcGoogle className="text-2xl mt-4"></FcGoogle>
+                  </button>
+                  <button onClick={handleGitHubSignIn}>
+                    <FaGithub className="text-2xl mt-4"></FaGithub>
                   </button>
                 </div>
               </div>
               <p className="text-center mt-5 text-lg">
                 New Here?
                 <span className="text-orange-600">
-                  <Link to="/register">Register</Link>
+                  <Link to="/register"> Register</Link>
                 </span>
               </p>
             </div>
           </div>
         </div>
-        <ToastContainer></ToastContainer>
       </div>
     </div>
   );

@@ -75,13 +75,13 @@ const Tasks = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       {tasks.length === 0 ? (
-        <div className="flex justify-center text-xl">
+        <div className="flex justify-center text-xl min-h-[90vh] items-center">
           <p>
             Welcome! Keep note so that you{" "}
             <span className="font-bold uppercase">
               <Typewriter
                 words={["never miss", "never forget", "become perfect"]}
-                loop={5}
+                loop={10}
                 cursor
                 cursorStyle="_"
                 typeSpeed={70}
@@ -92,7 +92,7 @@ const Tasks = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto min-h-screen mt-10">
           {["toDo", "ongoing", "completed"].map((status, idx) => (
             <TaskWrapper
               key={idx}

@@ -31,7 +31,11 @@ const Routes = createBrowserRouter([
       },
       {
         path: "/tasks",
-        element: <Tasks></Tasks>,
+        element: (
+          <PrivateRoute>
+            <Tasks></Tasks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
